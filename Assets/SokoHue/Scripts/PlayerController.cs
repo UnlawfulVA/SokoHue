@@ -26,17 +26,20 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        controls.Gameplay.Movement.performed += ctx => Move(ctx.ReadValue<Vector2>());
+        controls.Gameplay.Movement.started += ctx => Move(ctx.ReadValue<Vector2>());
     }
     private void Move(Vector2 direction)
     {
-        if (CanMove(direction))
-           transform.position += (Vector3)direction;
+        if (CanMove(direction) && direction.x != 0)
+            transform.position += new Vector3(direction.x, 0, 0);
+        else if (CanMove(direction) && direction.y != 0)
+            transform.position += new Vector3(0, direction.y, 0);
+        else direction = Vector2.zero;
     }
 
     private bool CanMove(Vector2 direction) 
     {
-        Vector3Int gridPosition = groundTilemap.WorldToCell(transform.position + (Vector3)direction);
+        Vector3Int gridPosition = groundTilemap.WorldToCell(transform.position + (Vector3)direction.normalized);
         if (!groundTilemap.HasTile(gridPosition) || collisionTilemap.HasTile(gridPosition)) 
             return false;
         return true;
