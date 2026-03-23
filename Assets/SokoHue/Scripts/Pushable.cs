@@ -1,31 +1,12 @@
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.Tilemaps;
 
-public class PlayerController : MonoBehaviour
+public class Pushable : MonoBehaviour
 {
     [SerializeField] private Tilemap groundTilemap;
     [SerializeField] private Tilemap collisionTilemap;
     private Controls controls;
-
-    private void Awake()
-    {
-        controls = new Controls();
-    }
-    private void OnEnable()
-    {
-        controls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.Disable();
-    }
-
-    private void Start()
-    {
-        controls.Gameplay.Movement.started += ctx => AttemptMove(ctx.ReadValue<Vector2>());
-    }
+    
     private void AttemptMove(Vector2 inputDirection)
     {
         // get intended direction
@@ -37,19 +18,19 @@ public class PlayerController : MonoBehaviour
         else intendedDirection = Vector2.zero;
 
         // check if tile in direction
-            if (CheckTileInDir(intendedDirection))
+        if (CheckTileInDir(intendedDirection))
         {
-            
+
         }
-            // check for pushable
-            // move
+        // check for pushable
+        // move
 
     }
 
-    private bool CheckTileInDir(Vector2 direction) 
+    private bool CheckTileInDir(Vector2 direction)
     {
         Vector3Int gridPosition = groundTilemap.WorldToCell(transform.position + (Vector3)direction.normalized);
-        if (!groundTilemap.HasTile(gridPosition) || collisionTilemap.HasTile(gridPosition)) 
+        if (!groundTilemap.HasTile(gridPosition) || collisionTilemap.HasTile(gridPosition))
             return false;
         return true;
     }
