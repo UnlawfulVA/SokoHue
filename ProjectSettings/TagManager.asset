@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pushable
   - Collision
+  - Win
   layers:
   - Default
   - TransparentFX

@@ -5,37 +5,34 @@ public class Pushable : MonoBehaviour
 {
     [SerializeField] private Tilemap groundTilemap;
     [SerializeField] private Tilemap collisionTilemap;
-    private Controls controls;
-    
-    private void AttemptMove(Vector2 inputDirection)
+
+    private Pushable GetPushableAtPosition(Vector3 worldPosition)
     {
-        // get intended direction
-        Vector3 intendedDirection;
-        if (inputDirection.x != 0)
-            intendedDirection = new Vector3(inputDirection.x, 0, 0);
-        else if (inputDirection.y != 0)
-            intendedDirection = new Vector3(0, inputDirection.y, 0);
-        else intendedDirection = Vector2.zero;
-
-        // check if tile in direction
-        if (CheckTileInDir(intendedDirection))
-        {
-
-        }
-        // check for pushable
-        // move
-
+        Collider2D hit = Physics2D.OverlapPoint(worldPosition);
+        if (hit != null)
+            return hit.GetComponent<Pushable>();
+        return null;
     }
 
-    private bool CheckTileInDir(Vector2 direction)
+    public bool TryPush(Vector2 direction)
     {
-        Vector3Int gridPosition = groundTilemap.WorldToCell(transform.position + (Vector3)direction.normalized);
-        if (!groundTilemap.HasTile(gridPosition) || collisionTilemap.HasTile(gridPosition))
+        Vector3 targetPos = transform.position + (Vector3)direction;
+        // Check if tile is walkable
+        Vector3Int gridPos = groundTilemap.WorldToCell(targetPos);
+        if (!groundTilemap.HasTile(gridPos) || collisionTilemap.HasTile(gridPos))
             return false;
-        return true;
-    }
-    private bool CheckIfPushable(bool tileInDir)
-    {
 
+        // Check for another pushable
+        Pushable nextPushable = GetPushableAtPosition(targetPos);
+        if (nextPushable != null)
+        {
+            // Recursively try to push the next one
+            if (!nextPushable.TryPush(direction))
+                return false;
+        }
+
+        // Move this pushable
+        transform.position = targetPos;
+        return true;
     }
 }
