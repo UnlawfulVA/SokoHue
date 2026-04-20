@@ -25,16 +25,4 @@ public class Button : MonoBehaviour
             Triggered = false;
         }
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("Collision entered");
-        if (!Triggered && collision.collider.CompareTag("Pushable"))
-        {
-            Press?.Invoke();
-            Triggered = true;
-        }
-    }
-
-
 }
