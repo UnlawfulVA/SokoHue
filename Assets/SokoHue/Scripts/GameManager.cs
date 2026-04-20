@@ -3,6 +3,7 @@ using System.Threading;
 using UnityEditor.SearchService;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> buttons = new List<GameObject>();
@@ -29,16 +30,19 @@ public class GameManager : MonoBehaviour
     private void OnPress()
     {
         countEvents++;
+        Debug.Log($"Button Pressed - current pressed = {countEvents}");
     }
     private void OnUnPress()
     {
         countEvents--;
+        Debug.Log($"Button Pressed - current pressed = {countEvents}");
     }
     private void OnWin()
     {
         if (countButtons == countEvents)
         {
             Debug.Log("Winnar");
+            SceneManager.LoadScene(1);
         }
     }
 }
