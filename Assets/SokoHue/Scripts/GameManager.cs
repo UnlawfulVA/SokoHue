@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> buttons = new List<GameObject>();
     private int countButtons;
     private int countEvents;
+    [SerializeField] private int levelIndex;
     private void Start()
     {
        countButtons = buttons.Count;
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour
         if (countButtons == countEvents)
         {
             Debug.Log("Winnar");
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(levelIndex);
         }
     }
 }
