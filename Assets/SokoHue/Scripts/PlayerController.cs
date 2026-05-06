@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2d;
 
     public static event Action Win;
+    public static event Action Move;
+
     private void Awake()
     {
         controls = new Controls();
@@ -69,7 +71,9 @@ public class PlayerController : MonoBehaviour
             {
                 // If no pushable object is found, move the player to the target position directly
                 transform.position = targetPos;
+
             }
+            Move.Invoke();
         }
     }
 

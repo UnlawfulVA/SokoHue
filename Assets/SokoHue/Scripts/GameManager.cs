@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         if (countButtons == countEvents)
         {
             Debug.Log("Winnar");
-            SceneManager.LoadScene(levelIndex);
+            SceneManager.LoadScene(levelIndex+1);
         }
     }
 }
