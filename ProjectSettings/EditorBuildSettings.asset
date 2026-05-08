@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/SokoHue/Scenes/Level 2.unity
     guid: 91d63a37ca1d3b341b1f33708e7483ab
+  - enabled: 1
+    path: Assets/SokoHue/Scenes/Level 3.unity
+    guid: 903f7594c51723d44be2b8e634328013
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

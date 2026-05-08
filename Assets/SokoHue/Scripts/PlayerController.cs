@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Tilemap collisionTilemap;
     private Controls controls;
     private Rigidbody2D rb2d;
+    [SerializeField] private LayerMask wallLayers;
 
     public static event Action Win;
     public static event Action Move;
@@ -82,9 +83,14 @@ public class PlayerController : MonoBehaviour
     {
         // Convert the player's world position plus the direction to a grid position
         Vector3Int gridPosition = groundTilemap.WorldToCell(transform.position + (Vector3)direction.normalized);
+        
+        // wallCol -> use boxcast to check if a wall gameobject is in intended direction
+        bool wallInDir = Physics2D.Raycast(transform.position, direction, 1.0f, wallLayers);
+
+        Debug.Log(wallInDir);
 
         // Check if there is no tile in the groundTilemap or if there is a tile in the collisionTilemap
-        if (!groundTilemap.HasTile(gridPosition) || collisionTilemap.HasTile(gridPosition))
+        if (!groundTilemap.HasTile(gridPosition) || collisionTilemap.HasTile(gridPosition) || wallInDir)
             return false; // Return false if movement is blocked
 
         return true; // Return true if movement is allowed
