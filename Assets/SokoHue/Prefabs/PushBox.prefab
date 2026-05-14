@@ -150,6 +150,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundTilemap: {fileID: 0}
   collisionTilemap: {fileID: 0}
+  wallLayers:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!50 &516314306658591075
 Rigidbody2D:
   serializedVersion: 5

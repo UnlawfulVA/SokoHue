@@ -14,6 +14,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/SokoHue/Scenes/Level 3.unity
     guid: 903f7594c51723d44be2b8e634328013
+  - enabled: 1
+    path: Assets/SokoHue/Scenes/Level 4.unity
+    guid: bc5b969e8f493404384e86f9068e991f
+  - enabled: 1
+    path: Assets/SokoHue/Scenes/Level 5.unity
+    guid: 48e6e2c9b129a484ab825ae855f4bdcc
+  - enabled: 1
+    path: Assets/SokoHue/Scenes/Level 6.unity
+    guid: 14598ce55faf0e742b6e6f82834b1200
+  - enabled: 1
+    path: Assets/SokoHue/Scenes/Level 7.unity
+    guid: 1c84c0bf32d54b84280a4c05f3e55686
+  - enabled: 1
+    path: Assets/SokoHue/Scenes/Level 8.unity
+    guid: be6ef092a176b964996be5d197b31354
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

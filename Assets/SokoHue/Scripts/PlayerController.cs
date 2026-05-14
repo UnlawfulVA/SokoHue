@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     public static event Action Win;
     public static event Action Move;
+    public static event Action Resetting;
 
     private void Awake()
     {
@@ -31,6 +33,8 @@ public class PlayerController : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         controls.Gameplay.Movement.started += ctx => AttemptMove(ctx.ReadValue<Vector2>());
+        controls.Gameplay.Reset.started += ctx => OnReset();
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -66,16 +70,18 @@ public class PlayerController : MonoBehaviour
                 {
                     // Move the player to the target position after a successful push
                     transform.position = targetPos;
+                    Move.Invoke();
                 }
             }
             else
             {
                 // If no pushable object is found, move the player to the target position directly
                 transform.position = targetPos;
-
+                Move.Invoke();
             }
-            Move.Invoke();
+            
         }
+        
     }
 
     // Checks if there is a tile in the specified direction
@@ -107,5 +113,9 @@ public class PlayerController : MonoBehaviour
             return hit.GetComponent<Pushable>(); // Return the Pushable component if it exists
 
         return null; // Return null if no pushable object is found
+    }
+    private void OnReset()
+    {
+        Resetting.Invoke();
     }
 }

@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip moveSound;
     public AudioClip winSound;
+    public AudioClip resetSound;
 
     public static AudioManager instance;
 
@@ -17,12 +18,14 @@ public class AudioManager : MonoBehaviour
     {
         PlayerController.Move += OnMove;
         PlayerController.Win += OnWin;
+        PlayerController.Resetting += ResetPlay;
     }
 
     private void OnDisable()
     {
         PlayerController.Move -= OnMove;
         PlayerController.Win -= OnWin;
+        PlayerController.Resetting -= ResetPlay;
     }
 
     private void Awake()
@@ -35,6 +38,7 @@ public class AudioManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
     }
     private void Start()
@@ -48,6 +52,7 @@ public class AudioManager : MonoBehaviour
         SfxSrc.pitch = Random.Range(0.5f, 1f);
         SfxSrc.clip = moveSound;
         SfxSrc.PlayOneShot(moveSound);
+        
     }
 
     private void OnWin()
@@ -57,4 +62,10 @@ public class AudioManager : MonoBehaviour
         SfxSrc.PlayOneShot(winSound);
     }
     
+    private void ResetPlay()
+    {
+        SfxSrc.pitch = 1;
+        SfxSrc.clip = resetSound;
+        SfxSrc.PlayOneShot(resetSound);
+    }
 }

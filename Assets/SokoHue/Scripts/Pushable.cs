@@ -6,6 +6,13 @@ public class Pushable : MonoBehaviour
     [SerializeField] private Tilemap groundTilemap;
     [SerializeField] private Tilemap collisionTilemap;
 
+    private Rigidbody2D rb2d;
+    [SerializeField] private LayerMask wallLayers;
+
+    private void Start()
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+    }
     private Pushable GetPushableAtPosition(Vector3 worldPosition)
     {
         Collider2D hit = Physics2D.OverlapPoint(worldPosition);
@@ -19,7 +26,9 @@ public class Pushable : MonoBehaviour
         Vector3 targetPos = transform.position + (Vector3)direction;
         // Check if tile is walkable
         Vector3Int gridPos = groundTilemap.WorldToCell(targetPos);
-        if (!groundTilemap.HasTile(gridPos) || collisionTilemap.HasTile(gridPos))
+
+        bool wallInDir = Physics2D.Raycast(transform.position, direction, 1.0f, wallLayers);
+        if (!groundTilemap.HasTile(gridPos) || collisionTilemap.HasTile(gridPos) || wallInDir)
             return false;
 
         // Check for another pushable

@@ -10,19 +10,18 @@ public class GameManager : MonoBehaviour
     private int countButtons;
     private int countEvents;
     [SerializeField] private int levelIndex;
+
     
-    private void Start()
-    {
-       countButtons = buttons.Count;
-    }
     private void OnEnable()
     {
         PlayerController.Win += OnWin;
+        PlayerController.Resetting += OnResetPress;
     }
     
     private void OnDisable()
     {
         PlayerController.Win -= OnWin;
+        PlayerController.Resetting -= OnResetPress;
     }
 
     
@@ -30,5 +29,10 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Winnar");
         SceneManager.LoadScene(levelIndex + 1);
+    }
+
+    private void OnResetPress()
+    {
+        SceneManager.LoadScene(levelIndex);
     }
 }
