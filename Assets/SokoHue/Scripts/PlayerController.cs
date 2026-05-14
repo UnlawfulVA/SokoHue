@@ -63,8 +63,10 @@ public class PlayerController : MonoBehaviour
         {
             // Attempt to get a pushable object at the target position
             Pushable pushable = GetPushableAtPosition(targetPos);
+            
             if (pushable != null)
-            {
+            {   
+                Debug.Log(pushable.ToString());
                 // If a pushable object is found, try to push it in the intended direction
                 if (pushable.TryPush(intendedDirection))
                 {

@@ -6460,7 +6460,7 @@ GameObject:
   - component: {fileID: 1527578052}
   - component: {fileID: 1527578051}
   - component: {fileID: 1527578055}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PushBox
   m_TagString: Pushable
   m_Icon: {fileID: 0}
@@ -6483,7 +6483,7 @@ MonoBehaviour:
   collisionTilemap: {fileID: 1762714537}
   wallLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
 --- !u!61 &1527578052
 BoxCollider2D:
   m_ObjectHideFlags: 0
